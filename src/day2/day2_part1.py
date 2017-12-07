@@ -8,15 +8,14 @@ def solve(input):
         row = row.split('\t')
         max = 0
         min = None
-        for digit in row:
-            digit = int(digit)
-            if digit > max:
-                max = digit
+        for item in row:
+            item = int(item)
+            if item > max:
+                max = item
             if min == None:
-                min = digit
-            if digit < min:
-                min = digit
-                print(min)
+                min = item
+            if item < min:
+                min = item
         sum += max - min
     return sum
 

@@ -1,25 +1,23 @@
-def solve(input):
-    input = str(input)
-    sum = 0
-    i = 0
-    steps = int(len(input)/2)
-    for x in input:
-        if (i + steps) >= len(input):
-            if input[i] == input[(i+steps)-(len(input))]:
-                sum += int(input[i])
-            i += 1
-            continue
-        if input[input.find(x,i)] == input[input.find(x,i)+int(steps)]:
-            sum += int(input[input.find(x,i)])
-        i += 1
-    return sum
+import itertools
 
-def test():
-    tests = [
-    solve('1212') == 6,
-    solve('1221') == 0,
-    solve('123425') == 4,
-    solve('123123') == 12,
-    solve('12131415') == 4
-    ]
-    print(tests)
+input = open("input.txt")
+input = input.read()
+input = input.split('\n')
+
+def solve(input):
+    sum = 0
+    for row in input:
+        row = row.split('\t')
+        for a, b in itertools.combinations(row, 2):
+            result = compare(int(a),int(b))
+            if result:
+                sum += result
+    return int(sum)
+
+
+def compare(a, b):
+    bigger = max([a,b])
+    smaller = min([a,b])
+    return bigger / smaller if not bigger%smaller else None
+
+print(solve(input))
